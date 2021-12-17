@@ -2,9 +2,12 @@ const express = require('express')
 const app = express()
 const {handleConnection} = require("./db")
 const {SAVE_USER_INFORMATION, GET_TOTAL_AMOUNT} = require('./models/server_db')
+const path = require('path')
+const publicPath = path.join(__dirname, './public')
 
 app.use(express.json({limit:"50mb"}))
 app.use(express.urlencoded({extended:false, limit:"50mb"}))
+app.use(express.static(publicPath))
 
 app.post('/', async (req, res) => {
    const {email, amount} = req.body
