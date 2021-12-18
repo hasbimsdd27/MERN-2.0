@@ -8,6 +8,13 @@ const {
 const path = require('path')
 const publicPath = path.join(__dirname, './public')
 const port = process.env.PORT || 5000
+const paypal = require('paypal-rest-sdk')
+
+paypal.configure({
+    mode: 'sandbox',
+    client_id: process.env.PAYPAL_CLIENT_ID,
+    client_secret: process.env.PAYPAL_CLIENT_SECRET,
+})
 
 app.use(express.json({ limit: '50mb' }))
 app.use(express.urlencoded({ extended: false, limit: '50mb' }))

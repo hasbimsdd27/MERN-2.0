@@ -17,6 +17,14 @@ class App extends React.Component {
         console.log(response)
     }
 
+    async componentDidMount() {
+        const result = await axios.get('/get_total_amount')
+        this.setState({
+            ...this.state,
+            total_amount: result.data[0].total_amount,
+        })
+    }
+
     render() {
         return (
             <div>
