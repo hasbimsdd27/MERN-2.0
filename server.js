@@ -4,6 +4,7 @@ const {handleConnection} = require("./db")
 const {SAVE_USER_INFORMATION, GET_TOTAL_AMOUNT} = require('./models/server_db')
 const path = require('path')
 const publicPath = path.join(__dirname, './public')
+const port = (process.env.PORT ||5000)
 
 app.use(express.json({limit:"50mb"}))
 app.use(express.urlencoded({extended:false, limit:"50mb"}))
@@ -33,7 +34,7 @@ app.get('/get_total_amount', async (req, res)=>{
      
 })
 
-app.listen(3000, () => {
+app.listen(port, () => {
     handleConnection()
-    console.log(`server is running on port 3000`)
+    console.log(`server is running on ${port}`)
 })
