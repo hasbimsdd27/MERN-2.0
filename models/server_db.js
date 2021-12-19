@@ -28,4 +28,37 @@ const GET_TOTAL_AMOUNT = () =>
         )
     })
 
-module.exports = { SAVE_USER_INFORMATION, GET_TOTAL_AMOUNT }
+const GET_LIST_OF_PARTICIPANTS = () =>
+    new Promise((res, rej) => {
+        GetDBSession().query(
+            'SELECT email from lottery_information',
+            null,
+            (err, results, fields) => {
+                if (err) {
+                    rej('could not get participant list', err)
+                }
+                res(results)
+            }
+        )
+    })
+
+const DELETE_ALL_USERS = () =>
+    new Promise((res, rej) => {
+        GetDBSession().query(
+            'DELETE from lottery_information WHERE id >0',
+            null,
+            (err, results, fields) => {
+                if (err) {
+                    rej('could not delete all users', err)
+                }
+                res('success on deleting all users')
+            }
+        )
+    })
+
+module.exports = {
+    SAVE_USER_INFORMATION,
+    GET_TOTAL_AMOUNT,
+    GET_LIST_OF_PARTICIPANTS,
+    DELETE_ALL_USERS,
+}
